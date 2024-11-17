@@ -7,6 +7,7 @@ import {
 import Link from "next/link";
 
 type AsetType = {
+  _id?: any;
   assetCategory: string;
   assetType: string;
   unitName: string;
