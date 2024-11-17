@@ -20,8 +20,8 @@ const LoginPage = () => {
               </h1>
               <form
                 className="space-y-4 md:space-y-6"
-                action="/home"
-                method="post"
+                // action="/home"
+                // method="post"
               >
                 <div>
                   <label
@@ -80,12 +80,13 @@ const LoginPage = () => {
                     Forgot password?
                   </Link>
                 </div>
-                <button
-                  type="submit"
+                <Link
+                  // type="submit"
+                  href="/home"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 >
                   Sign in
-                </button>
+                </Link>
                 <p className="text-sm font-light text-gray-500 ">
                   Don&apos;t have an account yet?{" "}
                   <Link
