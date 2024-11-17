@@ -1,8 +1,11 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-// import MultiLevelMenu from "@/components/dashboard/MultiLevelMenu";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const pathname = usePathname();
+
   return (
     <aside className="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white">
       <div className="h-full overflow-y-auto border-r">
@@ -15,7 +18,7 @@ const Sidebar = () => {
         </div>
         <ul className="p-3 flex flex-col gap-y-3">
           <li>
-            <Link href="/home" className="flex gap-4 items-center">
+            <Link href="/home" className={`flex gap-4 items-center`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -30,14 +33,25 @@ const Sidebar = () => {
               Home
             </Link>
           </li>
-          {/* <MultiLevelMenu
-            icon="/assets/manajemen-user.svg"
-            listSubMenu={[
-              { title: "Daftar Pengguna", url: "/user-management/users" },
-              { title: "Reset Akun Pengguna", url: "/reset-password" },
-            ]}
-            title="Manajemen Pengguna"
-          /> */}
+          <li>
+            <Link
+              href="/asset-management"
+              className={`flex gap-4 items-center`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M7 3h2v18H7zM4 3h2v18H4zm6 0h2v18h-2zm9.062 17.792l-6.223-16.89l1.877-.692l6.223 16.89z"
+                ></path>
+              </svg>
+              Asset Management
+            </Link>
+          </li>
         </ul>
       </div>
     </aside>

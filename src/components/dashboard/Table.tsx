@@ -5,14 +5,16 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Link from "next/link";
-import { useState } from "react";
 
 type AsetType = {
-  categoryAset: string;
-  typeAset: string;
+  assetCategory: string;
+  assetType: string;
   unitName: string;
   assetName: string;
   assetCode: string;
+  yearOfAcquisition: number;
+  acquisitionPrice: number;
+  currentEstimatedPrice: number;
 };
 
 interface AsetBergerakType extends AsetType {
@@ -20,12 +22,9 @@ interface AsetBergerakType extends AsetType {
   brand: string;
   type: string;
   cc: number;
-  yearOfAcquisition: number;
   chassisNumber: string;
   engineNumber: string;
   bpkbNumber: string;
-  acquisitionPrice: number;
-  currentEstimatedPrice: number;
 }
 
 interface AsetTakBergerakType extends AsetType {
@@ -33,80 +32,8 @@ interface AsetTakBergerakType extends AsetType {
   buildingType: string;
   buildingArea: number;
   landArea: number;
-  yearOfAcquisition: number;
-  acquisitionPrice: number;
-  currentEstimatedPrice: number;
   certificateStatus: string;
 }
-
-const defaultData: (AsetBergerakType | AsetTakBergerakType)[] = [
-  {
-    categoryAset: "Aset Bergerak",
-    typeAset: "Kendaraan Bermotor",
-    unitName: "Satpol PP",
-    assetName: "Station Wagon",
-    assetCode: "1234567",
-    // --------------------
-    policeNumber: "89012345",
-    brand: "Toyota Kijang",
-    type: "Innova G",
-    cc: 2000,
-    yearOfAcquisition: 2014,
-    chassisNumber: "MHFXW4268520",
-    engineNumber: "ITR6158965",
-    bpkbNumber: "6747426",
-    acquisitionPrice: 200000000,
-    currentEstimatedPrice: 120000000,
-  },
-  {
-    categoryAset: "Aset Tak Bergerak",
-    typeAset: "Rumah Dinas",
-    unitName: "Sekretariat DPRD",
-    assetName: "Rumah Dinas",
-    assetCode: "1234567",
-    // --------------------
-    pemdaId: "123456",
-    buildingType: "Rumah",
-    buildingArea: 350,
-    landArea: 2000,
-    yearOfAcquisition: 2014,
-    acquisitionPrice: 300000000,
-    currentEstimatedPrice: 720000000,
-    certificateStatus: "Sudah",
-  },
-  {
-    categoryAset: "Aset Tak Bergerak",
-    typeAset: "Rumah Dinas",
-    unitName: "Sekretariat DPRD",
-    assetName: "Rumah Dinas",
-    assetCode: "1234567",
-    // --------------------
-    pemdaId: "123456",
-    buildingType: "Rumah",
-    buildingArea: 350,
-    landArea: 2000,
-    yearOfAcquisition: 2014,
-    acquisitionPrice: 300000000,
-    currentEstimatedPrice: 720000000,
-    certificateStatus: "Belum & tidak sengketa",
-  },
-  {
-    categoryAset: "Aset Tak Bergerak",
-    typeAset: "Rumah Dinas",
-    unitName: "Sekretariat DPRD",
-    assetName: "Rumah Dinas",
-    assetCode: "1234567",
-    // --------------------
-    pemdaId: "123456",
-    buildingType: "Rumah",
-    buildingArea: 350,
-    landArea: 2000,
-    yearOfAcquisition: 2014,
-    acquisitionPrice: 300000000,
-    currentEstimatedPrice: 720000000,
-    certificateStatus: "Belum Jelas",
-  },
-];
 
 const columnHelper = createColumnHelper<
   AsetBergerakType | AsetTakBergerakType
@@ -125,11 +52,10 @@ const columns = [
   columnHelper.display({
     id: "actions",
     cell: (props) => {
-      console.log(props.row.index);
       return (
         <div className="flex flex-wrap gap-2">
           <Link
-            href={"/detail/" + props.row.index}
+            href={"/asset-management/detail/" + props.row.original._id}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
           >
             View
@@ -152,9 +78,7 @@ const columns = [
   }),
 ];
 
-const Table = () => {
-  const [data, _setData] = useState(() => [...defaultData]);
-
+const Table = ({ data }: any) => {
   const table = useReactTable({
     data,
     columns,

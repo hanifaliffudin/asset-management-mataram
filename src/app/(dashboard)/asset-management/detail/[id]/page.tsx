@@ -1,49 +1,35 @@
 "use client";
 
+import Map from "@/components/map/Map";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const DetailPage = ({ params }: { params: { id: string } }) => {
   const id = params.id;
 
   const router = useRouter();
 
-  const dataAsetBergerak = {
-    categoryAset: "Aset Bergerak",
-    typeAset: "Kendaraan Bermotor",
-    unitName: "Satpol PP",
-    assetName: "Station Wagon",
-    assetCode: "1234567",
-    // --------------------
-    policeNumber: "89012345",
-    brand: "Toyota Kijang",
-    type: "Innova G",
-    cc: 2000,
-    yearOfAcquisition: 2014,
-    chassisNumber: "MHFXW4268520",
-    engineNumber: "ITR6158965",
-    bpkbNumber: "6747426",
-    acquisitionPrice: 200000000,
-    currentEstimatedPrice: 120000000,
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<any>({});
+
+  const getDetail = async () => {
+    setIsLoading(true);
+    const response = await fetch("/api/assets?id=" + id);
+
+    if (response.ok) {
+      const dataFecth = await response.json();
+      setData(dataFecth.data);
+    } else {
+      alert("Something went wrong!");
+    }
+    setIsLoading(false);
   };
 
-  const dataAsetTakBegerak = {
-    categoryAset: "Aset Tak Bergerak",
-    typeAset: "Rumah Dinas",
-    unitName: "Sekretariat DPRD",
-    assetName: "Rumah Dinas",
-    assetCode: "1234567",
-    // --------------------
-    pemdaId: "123456",
-    buildingType: "Rumah",
-    buildingArea: 350,
-    landArea: 2000,
-    yearOfAcquisition: 2014,
-    acquisitionPrice: "MHFXW4268520",
-    currentEstimatedPrice: "ITR6158965",
-    certificateStatus: "6747426",
-  };
+  useEffect(() => {
+    getDetail();
+  }, []);
 
-  const data = id == "0" ? dataAsetBergerak : dataAsetTakBegerak;
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>
@@ -79,7 +65,7 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
               <th>Kode Aset</th>
               <td>: {data.assetCode}</td>
             </tr>
-            {id === "0" && (
+            {data.assetCategory == "Aset Bergerak" && (
               <>
                 <tr>
                   <th>Nopol</th>
@@ -133,7 +119,7 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
                 </tr>
               </>
             )}
-            {id === "1" && (
+            {data.assetCategory == "Aset Tak Bergerak" && (
               <>
                 <tr>
                   <th>ID Pemda</th>
@@ -183,25 +169,21 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
         <div className="col-span-2 max-h-screen">
           <img
             className={`w-auto object-cover rounded ${
-              id == "0" ? "h-full" : "max-h-64"
+              data.assetCategory == "Aset Bergerak" ? "h-full" : "max-h-64"
             }`}
-            src={id === "0" ? "/assets/innova.png" : "/assets/rumah-dinas.png"}
+            src={
+              data.assetCategory == "Aset Bergerak"
+                ? "/assets/innova.png"
+                : "/assets/rumah-dinas.png"
+            }
             alt="innova"
           />
 
-          {id === "1" && (
+          {data.assetCategory == "Aset Tak Bergerak" && (
             <>
               <div className="my-2">Alamat: Jalan Musi I no.5 Maratam</div>
 
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d647.3867190764981!2d116.09578456836869!3d-8.592577606705804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdbf29009def0b%3A0xd148af67fb86be61!2sRumah%20Dinas!5e0!3m2!1sid!2sid!4v1731591848814!5m2!1sid!2sid"
-                width="425"
-                height="250"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              <Map certificateStatus={data.certificateStatus} />
             </>
           )}
         </div>
