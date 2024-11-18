@@ -19,20 +19,25 @@ export async function GET(request: Request) {
     let listData;
 
     // search
-    if (assetCategory && assetType) {
+    if (assetType) {
       let query;
 
-      if (assetType == "Kendaraan Bermotor") {
-        query = { assetCategory, assetType, policeNumber: id };
+      if (id) {
+        if (assetType == "Kendaraan Bermotor") {
+          query = { assetCategory, assetType, policeNumber: id };
+        } else {
+          query = { assetCategory, assetType, pemdaId: id };
+        }
       } else {
-        query = { assetCategory, assetType, pemdaId: id };
+        query = { assetCategory, assetType };
       }
+
       listData = await collection.find(query).toArray();
     } else {
       if (id) {
         listData = await collection.findOne({ _id: new ObjectId(id) });
       } else {
-        listData = await collection.find({}).toArray();
+        listData = await collection.find({ assetCategory }).toArray();
       }
     }
 

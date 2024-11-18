@@ -3,7 +3,7 @@
 import Table from "@/components/dashboard/Table";
 import { bergerakOptions, takBergerakOptions } from "@/utils/constants";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);

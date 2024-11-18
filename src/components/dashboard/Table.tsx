@@ -79,7 +79,7 @@ const columns = [
   }),
 ];
 
-const Table = ({ data }: any) => {
+const Table = ({ data, isLoading }: any) => {
   const table = useReactTable({
     data,
     columns,
@@ -106,15 +106,32 @@ const Table = ({ data }: any) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr className="bg-white border-b" key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td className="px-6 py-4 w-0" key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+          {/* if loading */}
+          {isLoading ? (
+            <tr>
+              <td colSpan={4} className="text-center pt-5 w-0">
+                Loading...
+              </td>
             </tr>
-          ))}
+          ) : // if empty
+          data.length == 0 ? (
+            <tr>
+              <td colSpan={4} className="text-center pt-5 w-0">
+                No data available in table
+              </td>
+            </tr>
+          ) : (
+            // if exist
+            table.getRowModel().rows.map((row) => (
+              <tr className="bg-white border-b" key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td className="px-6 py-4 w-0" key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
       <div className="h-4" />

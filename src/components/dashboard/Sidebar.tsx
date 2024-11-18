@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MultiLevelMenu from "@/components/dashboard/MultiLevelMenu";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -16,9 +17,14 @@ const Sidebar = () => {
             alt="logo"
           />
         </div>
-        <ul className="p-3 flex flex-col gap-y-3">
+        <ul className="p-2 flex flex-col gap-y-2">
           <li>
-            <Link href="/home" className={`flex gap-4 items-center`}>
+            <Link
+              href="/home"
+              className={`flex gap-4 items-center p-2 ${
+                pathname === "/home" ? "bg-blue-500 rounded-lg text-white" : ""
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -33,11 +39,9 @@ const Sidebar = () => {
               Home
             </Link>
           </li>
-          <li>
-            <Link
-              href="/asset-management"
-              className={`flex gap-4 items-center`}
-            >
+          <MultiLevelMenu
+            pathname={pathname}
+            icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -49,9 +53,17 @@ const Sidebar = () => {
                   d="M7 3h2v18H7zM4 3h2v18H4zm6 0h2v18h-2zm9.062 17.792l-6.223-16.89l1.877-.692l6.223 16.89z"
                 ></path>
               </svg>
-              Asset Management
-            </Link>
-          </li>
+            }
+            listSubMenu={[
+              { title: "Aset Bergerak", url: "/asset-management/bergerak" },
+              {
+                title: "Aset Tak Bergerak",
+                url: "/asset-management/tak-bergerak",
+              },
+            ]}
+            title="Asset Management"
+            baseUrl="asset-management"
+          />
         </ul>
       </div>
     </aside>
