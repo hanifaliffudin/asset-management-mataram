@@ -66,10 +66,43 @@ const HomePage = () => {
     },
   ];
 
+  const dummyDataTable = [
+    {
+      merk: "Kapal Motor Penumpang",
+      kondisi: "Rusak Berat",
+      jumlah: 1,
+      harga: 1644,
+    },
+    {
+      merk: "Hino 300/Dutro 130 MD / Dutro 130 MD",
+      kondisi: "Rusak Berat",
+      jumlah: 2,
+      harga: 708,
+    },
+    {
+      merk: "Mitsubishi / Pajero",
+      kondisi: "Rusak Berat",
+      jumlah: 1,
+      harga: 541,
+    },
+    {
+      merk: "Microbus / FE71BCMT",
+      kondisi: "Rusak Berat",
+      jumlah: 1,
+      harga: 522,
+    },
+    {
+      merk: "Microbus / FE71BCMT",
+      kondisi: "Rusak Berat",
+      jumlah: 1,
+      harga: 522,
+    },
+  ];
+
   return (
     <div>
-      <div className="grid grid-cols-3 gap-8">
-        <div className="col-span-2">
+      <div className="grid grid-cols-3 gap-6">
+        <div className="col-span-2 border p-2 rounded-lg">
           <div className="flex gap-2 h-32">
             <img
               className="w-auto h-full"
@@ -100,11 +133,50 @@ const HomePage = () => {
           <Line data={dataLine} />
         </div>
 
-        <div className="col-span-3 w-1/3">
-          <h2 className="font-bold text-lg text-center">
+        <div className="col-span-1 border p-2 rounded-lg">
+          <h2 className="font-bold text-lg mb-8">
             Jumlah Kendaraan per Tipe Kendaraan
           </h2>
           <Doughnut data={dataDoughnut} plugins={pluginsDoughnut} />
+        </div>
+
+        <div className="relative overflow-x-auto col-span-2 border p-2 rounded-lg">
+          <h2 className="font-bold text-lg mb-2">
+            Kendaraan Dalam Kondisi Rusak dengan Harga diatas 300 Juta
+          </h2>
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Merk
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Kondisi
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Jumlah
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Harga Dalam Juta
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {dummyDataTable.map((data) => (
+                <tr className="bg-white border-b">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {data.merk}
+                  </th>
+                  <td className="px-6 py-4">{data.kondisi}</td>
+                  <td className="px-6 py-4">{data.jumlah}</td>
+                  <td className="px-6 py-4">{data.harga}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
