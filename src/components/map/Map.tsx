@@ -19,7 +19,7 @@ const Map = (certificateStatus: any) => {
       zoom={13}
       scrollWheelZoom={true}
       touchZoom
-      style={{ height: "300px" }}
+      style={{ height: "300px", width: "380px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

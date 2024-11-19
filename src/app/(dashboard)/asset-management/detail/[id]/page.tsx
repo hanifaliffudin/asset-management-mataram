@@ -50,6 +50,9 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
         </svg>
         Back
       </button>
+      <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+        {data.assetCategory}
+      </h1>
       <div className="grid grid-cols-3">
         <table className="border-separate [border-spacing:0.5rem] max-h-64">
           <tbody className="text-left">
@@ -169,7 +172,7 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
         <div className="col-span-2 max-h-screen">
           <img
             className={`w-auto object-cover rounded ${
-              data.assetCategory == "Aset Bergerak" ? "h-full" : "max-h-64"
+              data.assetCategory == "Aset Bergerak" ? "h-full" : "max-h-56"
             }`}
             src={
               data.assetCategory == "Aset Bergerak"
