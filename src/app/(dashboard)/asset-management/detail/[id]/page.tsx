@@ -53,7 +53,7 @@ const DetailPage = ({ params }: { params: { id: string } }) => {
       <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
         {data.assetCategory}
       </h1>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4">
         <table className="border-separate [border-spacing:0.5rem] max-h-64">
           <tbody className="text-left">
             <tr>
