@@ -114,7 +114,7 @@ const Table = ({ data, isLoading }: any) => {
               </td>
             </tr>
           ) : // if empty
-          data.length == 0 ? (
+          !data || data.length == 0 ? (
             <tr>
               <td colSpan={4} className="text-center pt-5 w-0">
                 No data available in table

@@ -79,7 +79,7 @@ const LoginPage = () => {
                     </div>
                   </div>
                   <Link
-                    href="/forgot-password"
+                    href="#"
                     className="text-sm font-medium text-blue-600 hover:underline "
                   >
                     Forgot password?
@@ -95,7 +95,7 @@ const LoginPage = () => {
                 <p className="text-sm font-light text-gray-500 ">
                   Don&apos;t have an account yet?{" "}
                   <Link
-                    href="/sign-up"
+                    href="#"
                     className="font-medium text-blue-600 hover:underline "
                   >
                     Sign up

@@ -23,7 +23,7 @@ const BergerakPage = () => {
 
     if (response.ok) {
       const data = await response.json();
-      setData(data.data);
+      if (response.status == 200) setData(data.data);
     } else {
       alert("Something went wrong!");
     }
@@ -88,21 +88,23 @@ const BergerakPage = () => {
           </select>
         </div>
 
-        <div>
-          <label
-            htmlFor="id"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            {type == "Kendaraan Bermotor" ? "Nomor Polisi" : "ID Pemda"}
-          </label>
-          <input
-            type="text"
-            id="id"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-        </div>
+        {type && (
+          <div>
+            <label
+              htmlFor="id"
+              className="block mb-2 text-sm font-medium text-gray-900"
+            >
+              {type == "Kendaraan Bermotor" ? "Nomor Polisi" : "ID Pemda"}
+            </label>
+            <input
+              type="text"
+              id="id"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+            />
+          </div>
+        )}
 
         <button
           type="submit"
