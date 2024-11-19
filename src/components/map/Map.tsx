@@ -2,7 +2,7 @@ import Leaflet from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-const Map = (certificateStatus: any) => {
+const Map = ({ certificateStatus }: any) => {
   const markerIcon = Leaflet.divIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill=${
       certificateStatus == "Sudah"
