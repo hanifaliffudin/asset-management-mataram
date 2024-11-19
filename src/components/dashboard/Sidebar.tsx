@@ -3,12 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MultiLevelMenu from "@/components/dashboard/MultiLevelMenu";
+import { useEffect } from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }: any) => {
   const pathname = usePathname();
 
+  useEffect(() => {
+    setSidebarIsOpen(false);
+  }, [pathname]);
+
   return (
-    <aside className="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white">
+    <aside
+      className={`fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full ${
+        sidebarIsOpen ? "translate-x-0" : ""
+      } lg:translate-x-0 bg-white`}
+    >
       <div className="h-full overflow-y-auto border-r">
         <div className="flex justify-center items-center border-b h-16">
           <img

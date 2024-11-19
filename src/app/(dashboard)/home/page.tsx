@@ -102,14 +102,14 @@ const HomePage = () => {
   return (
     <div>
       <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2 border p-2 rounded-lg">
-          <div className="flex gap-2 h-32">
+        <div className="col-span-3 md:col-span-2 border p-2 rounded-lg">
+          <div className="flex justify-center gap-2 md:h-32 max-md:mb-4">
             <img
-              className="w-auto h-full"
+              className="w-auto h-full max-md:hidden"
               src="https://bkpsdm.mataramkota.go.id/assets/img/kota_mataram.png"
               alt="logo"
             />
-            <div className="grid grid-cols-3 gap-2 text-nowrap">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-nowrap">
               <div className="flex flex-col justify-center items-center">
                 <h3 className="text-sm">Jumlah Total Kendaraan</h3>
                 <div className="font-bold text-3xl flex justify-center items-center h-full">
@@ -133,50 +133,52 @@ const HomePage = () => {
           <Line data={dataLine} />
         </div>
 
-        <div className="col-span-1 border p-2 rounded-lg">
+        <div className="col-span-3 md:col-span-1 border p-2 rounded-lg">
           <h2 className="font-bold text-lg mb-8">
             Jumlah Kendaraan per Tipe Kendaraan
           </h2>
           <Doughnut data={dataDoughnut} plugins={pluginsDoughnut} />
         </div>
 
-        <div className="relative overflow-x-auto col-span-2 border p-2 rounded-lg">
+        <div className="col-span-3 md:col-span-2 border p-2 rounded-lg">
           <h2 className="font-bold text-lg mb-2">
             Kendaraan Dalam Kondisi Rusak dengan Harga diatas 300 Juta
           </h2>
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Merk
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Kondisi
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Jumlah
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Harga Dalam Juta
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {dummyDataTable.map((data) => (
-                <tr className="bg-white border-b">
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                  >
-                    {data.merk}
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Merk
                   </th>
-                  <td className="px-6 py-4">{data.kondisi}</td>
-                  <td className="px-6 py-4">{data.jumlah}</td>
-                  <td className="px-6 py-4">{data.harga}</td>
+                  <th scope="col" className="px-6 py-3">
+                    Kondisi
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Jumlah
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Harga Dalam Juta
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {dummyDataTable.map((data) => (
+                  <tr className="bg-white border-b">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    >
+                      {data.merk}
+                    </th>
+                    <td className="px-6 py-4">{data.kondisi}</td>
+                    <td className="px-6 py-4">{data.jumlah}</td>
+                    <td className="px-6 py-4">{data.harga}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
